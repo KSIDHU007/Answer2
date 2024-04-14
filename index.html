@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meown Blog</title>
+  <link rel="stylesheet" href="style2.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+<body>
+
+<header>
+  <h1>Meown Blog</h1>
+  <nav>
+    <a href="index.html">Blog</a>
+    <a href="Contact.html">Contact Us</a>
+    <a href="Services.html">Services</a>
+  </nav>
+</header>
+
+<div class="container" id="blog">
+  <h2>Blog</h2>
+  <ul id="blog-posts">
+  </ul>
+</div>
+
+<footer>
+  <p>Made by &copy; Sidhu.</p>
+</footer>
+
+<script>
+  $(document).ready(function(){
+    // Use $.get() to fetch XML data
+    $.get("data.xml", function(data) {
+      // Clear existing content of #blog-posts element
+      $("#blog-posts").html('');
+  
+      // Iterate through each <li> element inside <blog>
+      $(data).find("blog").find("li").each(function() {
+        var post = $(this);
+        $("#blog-posts").append("<h3>" +
+          post.find("title").text() + "</h3>" +
+          post.find("content").text() + "<br>");
+      });
+    });
+  });
+  </script>
+  
+
+</body>
+</html>
